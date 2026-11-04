@@ -402,7 +402,7 @@ function renderPins() {
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 17v3h16v-3"/></svg>
         </button>
       </div>
-      <div class="pin-card-info"><h3 class="pin-card-title">${escapeHtml(pin.title)}</h3><span class="pin-card-category">${escapeHtml(pin.category)}</span></div>
+      <div class="pin-card-info"><h3 class="pin-card-title">${escapeHtml(pin.title)}</h3><span class="pin-card-category" data-category="${escapeHtml(pin.category)}">${escapeHtml(pin.category)}</span></div>
       <div class="pin-source"><span class="source-avatar">${escapeHtml(pin.initials || "V")}</span><span>${escapeHtml(creator)}</span></div>
     </article>`;
   }).join("");
@@ -590,6 +590,7 @@ function showPin(id) {
   document.querySelector("#modal-share").dataset.sharePin = pin.id;
   document.querySelector("#modal-download").dataset.downloadPin = pin.id;
   document.querySelector("#modal-category").textContent = pin.category;
+  document.querySelector("#modal-category").dataset.category = pin.category;
   document.querySelector("#modal-title").textContent = pin.title;
   document.querySelector("#modal-description").textContent = pin.description || "Uma ideia para guardar e revisitar quando quiser.";
   const credit = document.querySelector("#modal-credit");
