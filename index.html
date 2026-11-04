@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Descubra ideias, salve inspirações e organize sua próxima criação."
+    />
+    <meta name="theme-color" content="#fbfaf8" />
+    <title>moodboard — ideias para guardar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar" aria-label="Navegação principal">
+      <a class="brand" href="#" aria-label="moodboard, início">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 34 34" fill="none">
+            <rect x="2.8" y="2.8" width="28.4" height="28.4" rx="9" fill="#D94F3D" />
+            <circle cx="23" cy="11.5" r="2.2" fill="#fff" />
+            <path d="m6.8 24 6.6-7.1 4.5 4.3 2.3-2.4 7 5.2H6.8Z" fill="#fff" />
+          </svg>
+        </span>
+        <span class="brand-name">moodboard<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="sidebar-label">MENU</div>
+      <nav class="primary-nav">
+        <button class="nav-link active" data-view="home" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.75 10.5 8.25-7 8.25 7v9a1.75 1.75 0 0 1-1.75 1.75h-13A1.75 1.75 0 0 1 3.75 19.5v-9Z"/><path d="M9 21.25v-7h6v7"/></svg>
+          <span>Início</span>
+        </button>
+        <button class="nav-link" data-view="explore" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="7.05"/><path d="m16 16 4.25 4.25"/><path d="m8.7 12.5 1.3-3.4 3.2-1.35-1.3 3.45-3.2 1.3Z"/></svg>
+          <span>Explorar</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-label sidebar-label-spaced">SUA COLEÇÃO</div>
+      <nav class="primary-nav">
+        <button class="nav-link" data-view="saved" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 4.25h11a1.75 1.75 0 0 1 1.75 1.75v14l-7.25-4.35-7.25 4.35V6a1.75 1.75 0 0 1 1.75-1.75Z"/></svg>
+          <span>Salvos</span>
+          <span class="saved-count" id="saved-count">0</span>
+        </button>
+        <button class="nav-link create-nav" id="create-button" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          <span>Criar um pin</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-note">
+          <span class="note-spark" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1.5 11.6 8.4 18.5 10l-6.9 1.6L10 18.5l-1.6-6.9L1.5 10l6.9-1.6L10 1.5Z"/></svg></span>
+          <p>Ideias bonitas merecem um lugar especial.</p>
+        </div>
+        <div class="profile">
+          <div class="profile-avatar">C</div>
+          <div class="profile-copy"><strong>Seu espaço</strong><span>coleção pessoal</span></div>
+          <button class="icon-button profile-menu" type="button" aria-label="Opções do perfil">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <form class="search-wrap" id="search-form" role="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="7.05"/><path d="m16 16 4.25 4.25"/></svg>
+          <input id="search-input" type="search" placeholder="Busque ideias, lugares, inspirações..." autocomplete="off" aria-label="Buscar imagens" />
+          <kbd>⌘ K</kbd>
+        </form>
+        <div class="topbar-actions">
+          <button class="icon-button notification-button" type="button" aria-label="Notificações">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"/></svg>
+            <span class="notification-dot"></span>
+          </button>
+          <button class="top-create" id="top-create-button" type="button"><span>+</span> Criar</button>
+          <div class="top-avatar" aria-label="Perfil">C</div>
+        </div>
+      </header>
+
+      <section class="page-heading" aria-labelledby="page-title">
+        <div class="heading-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> QUARTA-FEIRA, 04 DE NOVEMBRO</div>
+          <h1 id="page-title">Um pouco de inspiração<span class="heading-period">.</span></h1>
+          <p id="page-subtitle">Ideias que combinam com o que você está imaginando.</p>
+        </div>
+        <button class="heading-create" id="heading-create-button" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          Criar pin
+        </button>
+      </section>
+
+      <section class="discovery" aria-label="Ideias em destaque">
+        <div class="discovery-copy">
+          <span class="discovery-kicker">COLEÇÃO DA SEMANA</span>
+          <h2>Pequenos refúgios,<br />grandes respiros.</h2>
+          <p>Espaços calmos para desacelerar e se sentir em casa.</p>
+          <button class="discovery-link" type="button" data-search="interiores">Descobrir coleção <span aria-hidden="true">↗</span></button>
+        </div>
+        <div class="discovery-image" role="img" aria-label="Sala serena com sofá claro, luz natural e detalhes em madeira"></div>
+        <div class="discovery-index"><span>01</span> / 04</div>
+      </section>
+
+      <div class="section-toolbar">
+        <div class="section-heading">
+          <h2 id="grid-heading">Feito para você</h2>
+          <span class="result-count" id="result-count"></span>
+        </div>
+        <div class="toolbar-right">
+          <div class="filter-list" aria-label="Filtrar por categoria">
+            <button class="filter-chip active" type="button" data-category="Tudo">Tudo</button>
+            <button class="filter-chip" type="button" data-category="Interiores">Interiores</button>
+            <button class="filter-chip" type="button" data-category="Arquitetura">Arquitetura</button>
+            <button class="filter-chip" type="button" data-category="Viagem">Viagem</button>
+            <button class="filter-chip" type="button" data-category="Natureza">Natureza</button>
+            <button class="filter-chip" type="button" data-category="Estilo">Estilo</button>
+            <button class="filter-chip" type="button" data-category="Tecnologia">Tecnologia</button>
+            <button class="filter-chip" type="button" data-category="Receitas">Receitas</button>
+            <button class="filter-chip" type="button" data-category="Arte">Arte</button>
+            <button class="filter-chip" type="button" data-category="Fotografia">Fotografia</button>
+          </div>
+          <button class="view-button" type="button" aria-label="Visualização em mosaico">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <section class="pin-grid" id="pin-grid" aria-live="polite" aria-label="Imagens inspiradoras"></section>
+      <div class="empty-state" id="empty-state" hidden>
+        <div class="empty-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="7.05"/><path d="m16 16 4.25 4.25"/></svg>
+        </div>
+        <h3 id="empty-title">Ainda não há pins por aqui</h3>
+        <p id="empty-message">Tente outra busca ou explore novas ideias.</p>
+        <button class="empty-reset" id="empty-reset" type="button">Ver todas as ideias</button>
+      </div>
+      <footer class="page-footer"><span>Feito para guardar o que inspira.</span><span>Um lugar seu, do seu jeito <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5 11.6 8.4 18.5 10l-6.9 1.6L10 18.5l-1.6-6.9L1.5 10l6.9-1.6L10 1.5Z"/></svg></span></footer>
+    </main>
+
+    <nav class="mobile-nav" aria-label="Navegação móvel">
+      <button class="mobile-nav-link active" data-view="home" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3.75 10.5 8.25-7 8.25 7v9a1.75 1.75 0 0 1-1.75 1.75h-13A1.75 1.75 0 0 1 3.75 19.5v-9Z"/><path d="M9 21.25v-7h6v7"/></svg><span>Início</span></button>
+      <button class="mobile-nav-link" data-view="explore" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="7.05"/><path d="m16 16 4.25 4.25"/></svg><span>Explorar</span></button>
+      <button class="mobile-nav-create" id="mobile-create-button" type="button" aria-label="Criar um pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+      <button class="mobile-nav-link" data-view="saved" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 4.25h11a1.75 1.75 0 0 1 1.75 1.75v14l-7.25-4.35-7.25 4.35V6a1.75 1.75 0 0 1 1.75-1.75Z"/></svg><span>Salvos</span></button>
+      <button class="mobile-nav-link mobile-profile" type="button" aria-label="Perfil"><span class="mobile-avatar">C</span><span>Perfil</span></button>
+    </nav>
+
+    <div class="modal-backdrop" id="pin-modal" hidden>
+      <section class="pin-modal modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal-close icon-button" type="button" aria-label="Fechar imagem">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+        <div class="modal-image-wrap"><img class="modal-image" id="modal-image" alt="" /></div>
+        <div class="modal-content">
+          <div class="modal-topline">
+            <span class="modal-category" id="modal-category"></span>
+            <div class="modal-actions">
+              <button class="modal-action" id="modal-share" type="button" aria-label="Compartilhar imagem">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4m-6.6 7 6.6 4.4"/></svg>
+              </button>
+              <button class="modal-action" id="modal-download" type="button" aria-label="Baixar imagem">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 17v3h16v-3"/></svg>
+              </button>
+              <button class="modal-save" id="modal-save" type="button"></button>
+            </div>
+          </div>
+          <h2 id="modal-title"></h2>
+          <p class="modal-description" id="modal-description"></p>
+          <div class="modal-credit"><div class="credit-avatar" id="credit-avatar"></div><div><span>Imagem e autoria</span><a id="modal-credit" target="_blank" rel="noopener noreferrer"></a></div></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="create-modal" hidden>
+      <section class="create-modal modal-panel" role="dialog" aria-modal="true" aria-labelledby="create-title">
+        <button class="modal-close icon-button" type="button" aria-label="Fechar criação">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+        <div class="create-modal-heading"><span class="create-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span class="eyebrow">SUA PRÓXIMA IDEIA</span><h2 id="create-title">Crie um pin</h2><p>Escolha uma imagem e dê um nome para ela.</p></div>
+        <form class="create-form" id="create-form">
+          <label for="pin-title-input">Nome do pin</label>
+          <input id="pin-title-input" name="title" type="text" maxlength="64" placeholder="Ex.: Um cantinho para chamar de meu" required />
+          <label for="pin-image-select">Imagem da coleção</label>
+          <select id="pin-image-select" name="image" required></select>
+          <div class="create-preview" id="create-preview"></div>
+          <label for="pin-category-select">Categoria</label>
+          <select id="pin-category-select" name="category">
+            <option>Interiores</option><option>Viagem</option><option>Estilo</option><option>Receitas</option><option>Natureza</option>
+          </select>
+          <button class="publish-button" type="submit">Adicionar à coleção <span aria-hidden="true">↗</span></button>
+        </form>
+      </section>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"><span class="toast-message"></span><a class="toast-action" hidden target="_blank" rel="noopener noreferrer">Abrir imagem</a></div>
+    <script src="app.js"></script>
+  </body>
+</html>
