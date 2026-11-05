@@ -120,20 +120,35 @@ export default function Header({
             onSearch(search);
           }}
         >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
+          <svg className="search-icon" viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="10.8" cy="10.8" r="7.05" />
             <path d="m16 16 4.25 4.25" />
           </svg>
           <input
             ref={searchInputRef}
             type="search"
-            placeholder="Busque ideias, lugares, inspirações..."
+            placeholder="Buscar imagens e inspirações..."
             autoComplete="off"
             aria-label="Buscar imagens"
             value={search}
             onChange={(event) => onSearch(event.target.value)}
           />
-          <kbd>⌘ K</kbd>
+          {search && (
+            <button
+              className="search-clear"
+              type="button"
+              aria-label="Limpar pesquisa"
+              onClick={() => {
+                onSearch("");
+                searchInputRef.current?.focus();
+              }}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m6 6 12 12M18 6 6 18" />
+              </svg>
+            </button>
+          )}
+          <kbd aria-hidden="true">⌘ K</kbd>
         </form>
         <div className="topbar-actions">
           <button

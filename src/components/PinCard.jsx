@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { imageUrl } from "../services/images.js";
 
 function SaveIcon({ saved }) {
@@ -22,11 +22,31 @@ export default function PinCard({
   onDownload,
 }) {
   const [unavailable, setUnavailable] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [favoriteAnimating, setFavoriteAnimating] = useState(false);
+  const favoriteAnimationTimer = useRef(null);
+
+  useEffect(
+    () => () => {
+      window.clearTimeout(favoriteAnimationTimer.current);
+    },
+    [],
+  );
+
+  function toggleSaved() {
+    window.clearTimeout(favoriteAnimationTimer.current);
+    setFavoriteAnimating(true);
+    favoriteAnimationTimer.current = window.setTimeout(
+      () => setFavoriteAnimating(false),
+      300,
+    );
+    onToggleSaved(pin.id);
+  }
 
   return (
     <article className="pin-card" data-pin-id={pin.id}>
       <button
-        className={`pin-image-button${unavailable ? " is-unavailable" : ""}`}
+        className={`pin-image-button${unavailable ? " is-unavailable" : ""}${!imageLoaded && !unavailable ? " is-loading" : ""}`}
         type="button"
         onClick={() => onOpen(pin)}
         aria-label={`Ver ${pin.title}`}
@@ -39,14 +59,20 @@ export default function PinCard({
           decoding="async"
           fetchPriority="low"
           style={{ aspectRatio: `300 / ${pin.height || 450}` }}
-          onError={() => setUnavailable(true)}
-          onLoad={() => setUnavailable(false)}
+          onError={() => {
+            setUnavailable(true);
+            setImageLoaded(true);
+          }}
+          onLoad={() => {
+            setUnavailable(false);
+            setImageLoaded(true);
+          }}
         />
       </button>
       <button
-        className={`pin-save${saved ? " is-saved" : ""}`}
+        className={`pin-save${saved ? " is-saved" : ""}${favoriteAnimating ? " is-animating" : ""}`}
         type="button"
-        onClick={() => onToggleSaved(pin.id)}
+        onClick={toggleSaved}
         aria-label={saved ? "Remover dos salvos" : "Salvar imagem"}
         aria-pressed={saved}
       >

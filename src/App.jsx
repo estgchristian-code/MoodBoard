@@ -38,6 +38,7 @@ export default function App() {
   const [reduceMotion, setReduceMotion] = useState(() => readReducedMotionPreference(profile));
   const lastFocusedElement = useRef(null);
   const toastTimer = useRef(null);
+  const modalCloseTimer = useRef(null);
   const searchInputRef = useRef(null);
 
   const allPins = useMemo(() => [...customPins, ...catalogPins], [customPins]);
@@ -78,11 +79,29 @@ export default function App() {
   );
 
   const closeModal = useCallback(() => {
-    setActiveModal(null);
-    setSelectedNotification(null);
-  }, []);
+    if (!activeModal || modalCloseTimer.current !== null) return;
+
+    const backdrop = document.querySelector(".modal-backdrop");
+    const motionReduced =
+      reduceMotion || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!backdrop || motionReduced) {
+      setActiveModal(null);
+      setSelectedNotification(null);
+      return;
+    }
+
+    backdrop.classList.add("is-closing");
+    modalCloseTimer.current = window.setTimeout(() => {
+      modalCloseTimer.current = null;
+      setActiveModal(null);
+      setSelectedNotification(null);
+    }, 180);
+  }, [activeModal, reduceMotion]);
 
   const openModal = useCallback((name) => {
+    window.clearTimeout(modalCloseTimer.current);
+    modalCloseTimer.current = null;
+    document.querySelector(".modal-backdrop")?.classList.remove("is-closing");
     lastFocusedElement.current = document.activeElement;
     setActiveModal(name);
     setActivePopover(null);
@@ -133,6 +152,7 @@ export default function App() {
   useEffect(
     () => () => {
       window.clearTimeout(toastTimer.current);
+      window.clearTimeout(modalCloseTimer.current);
     },
     [],
   );
@@ -353,7 +373,7 @@ export default function App() {
     ) {
       return;
     }
-    setActiveModal(null);
+    closeModal();
     setCurrentView("home");
     setActiveCategory("Tudo");
     setSearch("");
