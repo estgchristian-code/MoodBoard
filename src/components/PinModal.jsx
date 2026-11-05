@@ -1,9 +1,12 @@
 import { useState } from "react";
 import ModalShell from "./ModalShell.jsx";
-import { imageUrl } from "../services/images.js";
+import { imageUrl, isSafeExternalUrl } from "../services/images.js";
 
 export default function PinModal({ pin, saved, onClose, onToggleSaved, onShare, onDownload }) {
   const [unavailable, setUnavailable] = useState(false);
+  const sourceUrl = isSafeExternalUrl(pin.source)
+    ? pin.source
+    : imageUrl(pin.image, 2400);
 
   return (
     <ModalShell id="pin-modal" onClose={onClose}>
@@ -61,9 +64,13 @@ export default function PinModal({ pin, saved, onClose, onToggleSaved, onShare, 
               <div className="credit-avatar">{pin.initials || "V"}</div>
               <div>
                 <span>Imagem e autoria</span>
-                <a href={pin.source || imageUrl(pin.image, 2400)} target="_blank" rel="noopener noreferrer">
-                  {pin.creator || "Sua coleção"}
-                </a>
+                {sourceUrl ? (
+                  <a href={sourceUrl} target="_blank" rel="noopener noreferrer">
+                    {pin.creator || "Sua coleção"}
+                  </a>
+                ) : (
+                  <span>{pin.creator || "Sua coleção"}</span>
+                )}
               </div>
             </div>
           </div>
